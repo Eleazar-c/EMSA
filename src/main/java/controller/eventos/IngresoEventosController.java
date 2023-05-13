@@ -5,6 +5,7 @@
 package controller.eventos;
 
 import clases.evento;
+import java.io.File;
 import java.net.URL;
 import java.util.Observable;
 import java.util.ResourceBundle;
@@ -20,6 +21,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 
 /**
  * FXML Controller class
@@ -30,6 +34,12 @@ public class IngresoEventosController implements Initializable {
 
     @FXML
     private Button agregar;
+    
+    @FXML
+    private Button btnBuscar;
+
+    @FXML
+    private Button btnRegistrar;
 
     @FXML
     private TableView<evento> tblTiempoEveneto;
@@ -47,6 +57,9 @@ public class IngresoEventosController implements Initializable {
     private DatePicker dpFecha;
 
     private ObservableList<evento> evento;
+    
+     @FXML
+    private ImageView ivImagen;
 
     /**
      * Initializes the controller class.
@@ -97,4 +110,30 @@ public class IngresoEventosController implements Initializable {
 
     }
 
+    @FXML
+    void subirImaggen(ActionEvent event) {
+         FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Buscar Imagen");
+
+        // Agregar filtros para facilitar la busqueda
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All Images", "*.*"),
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG", "*.png")
+        );
+
+        // Obtener la imagen seleccionada
+        File imgFile = fileChooser.showOpenDialog(null);
+
+        // Mostar la imagen
+        if (imgFile != null) {
+            Image image = new Image("file:" + imgFile.getAbsolutePath());
+            ivImagen.setImage(image);
+        }
+    }
+    
+     @FXML
+    void registrarEvento(ActionEvent event) {
+
+    }
 }

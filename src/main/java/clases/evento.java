@@ -16,6 +16,13 @@ public class evento {
 
     private String hora;
     
+    private String nombreEvento;
+    private String sinopsis;
+    
+    private String fechaInicioVisible;
+    private String fechaFinalVisible;
+    
+    private decimal precioVIP_M&G;
      public evento(String Fecha, String Hora) {
         this.fecha = Fecha;
         this.hora = Hora;
