@@ -8,5 +8,6 @@ module com.proyect.emsa {
     requires javafx.fxml;
     opens controller to javafx.fxml;
     opens controller.usuario to javafx.fxml;
-
+    opens controller.eventos to javafx.fxml;
+    opens clases to javafx.base;
 }
