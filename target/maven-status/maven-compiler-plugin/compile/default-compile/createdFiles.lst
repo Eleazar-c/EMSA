@@ -2,6 +2,7 @@ controller\usuarioController.class
 controller\eventos\IngresoEventosController.class
 controller\usuario\registrarUsuario.class
 controller\home\InicioController.class
+model\eventoModelo.class
 clases\evento.class
 clases\Rol.class
 clases\usuario.class

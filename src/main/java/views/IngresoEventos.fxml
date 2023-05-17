@@ -27,28 +27,28 @@
       </Label>
       <Label layoutX="41.0" layoutY="99.0" text="Nombre del evento:" />
       <Label layoutX="42.0" layoutY="164.0" text="Sinopsis del evento:" />
-      <TextField layoutX="41.0" layoutY="126.0" prefHeight="25.0" prefWidth="267.0" />
-      <TextArea layoutX="41.0" layoutY="189.0" prefHeight="200.0" prefWidth="274.0" />
+      <TextField fx:id="txtNombreEvento" layoutX="41.0" layoutY="126.0" prefHeight="25.0" prefWidth="267.0" />
+      <TextArea fx:id="txtDescripcion" layoutX="41.0" layoutY="189.0" prefHeight="200.0" prefWidth="274.0" />
       <Label layoutX="429.0" layoutY="126.0" text="Precio de los boletos:" />
       <Label layoutX="430.0" layoutY="153.0" text="VIP+M&amp;G:" />
       <Label layoutX="438.0" layoutY="199.0" text="VIP:" />
       <Label layoutX="596.0" layoutY="153.0" text="Platea A:" />
       <Label layoutX="597.0" layoutY="199.0" text="Platea B:" />
-      <TextField layoutX="496.0" layoutY="149.0" prefHeight="25.0" prefWidth="68.0" />
-      <TextField layoutX="496.0" layoutY="195.0" prefHeight="25.0" prefWidth="68.0" />
-      <TextField layoutX="658.0" layoutY="149.0" prefHeight="25.0" prefWidth="68.0" />
-      <TextField layoutX="658.0" layoutY="195.0" prefHeight="25.0" prefWidth="68.0" />
-      <DatePicker layoutX="483.0" layoutY="35.0" prefHeight="25.0" prefWidth="132.0" />
+      <TextField fx:id="txtVipMg" layoutX="496.0" layoutY="149.0" prefHeight="25.0" prefWidth="68.0" />
+      <TextField fx:id="txtVip" layoutX="496.0" layoutY="195.0" prefHeight="25.0" prefWidth="68.0" />
+      <TextField fx:id="txtPlanA" layoutX="658.0" layoutY="149.0" prefHeight="25.0" prefWidth="68.0" />
+      <TextField fx:id="txtPlanB" layoutX="658.0" layoutY="195.0" prefHeight="25.0" prefWidth="68.0" />
+      <DatePicker fx:id="dpFechaInicio" layoutX="483.0" layoutY="35.0" prefHeight="25.0" prefWidth="132.0" />
       <Label layoutX="424.0" layoutY="9.0" text="Fecha Visible:" />
       <Label layoutX="429.0" layoutY="39.0" text="Inicio:" />
       <Label layoutX="429.0" layoutY="78.0" text="Fin:" />
-      <DatePicker layoutX="483.0" layoutY="74.0" prefHeight="25.0" prefWidth="132.0" />
+      <DatePicker fx:id="dpFechaFiinal" layoutX="483.0" layoutY="74.0" prefHeight="25.0" prefWidth="132.0" />
       <DatePicker fx:id="dpFecha" layoutX="440.0" layoutY="248.0" prefHeight="25.0" prefWidth="132.0" />
       <TextField fx:id="txtHora" layoutX="586.0" layoutY="248.0" />
       <Label layoutX="586.0" layoutY="225.0" text="Hora:" />
       <Label layoutX="436.0" layoutY="225.0" text="Fecha del evento:" />
       <Button fx:id="agregar" layoutX="440.0" layoutY="297.0" mnemonicParsing="false" onAction="#btnAgregarFecha" text="Agregar" />
-      <TableView fx:id="tblTiempoEveneto" layoutX="440.0" layoutY="336.0" prefHeight="200.0" prefWidth="254.0">
+      <TableView fx:id="tvFechasEvento" layoutX="440.0" layoutY="336.0" prefHeight="200.0" prefWidth="254.0">
         <columns>
             <TableColumn fx:id="colFecha" prefWidth="142.0" text="Fecha" />
             <TableColumn fx:id="colHora" minWidth="8.0" prefWidth="111.0" text="Hora" />

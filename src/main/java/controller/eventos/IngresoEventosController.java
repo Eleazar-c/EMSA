@@ -5,25 +5,30 @@
 package controller.eventos;
 
 import clases.evento;
-import java.io.File;
-import java.net.URL;
-import java.util.Observable;
-import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.Initializable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 /**
  * FXML Controller class
@@ -42,13 +47,19 @@ public class IngresoEventosController implements Initializable {
     private Button btnRegistrar;
 
     @FXML
-    private TableView<evento> tblTiempoEveneto;
+    private TableView<evento> tvFechasEvento;
 
      @FXML
     private TableColumn colFecha;
 
     @FXML
     private TableColumn colHora;
+
+    @FXML
+    private TableColumn<evento, String> colFecha2;
+
+    @FXML
+    private TableColumn<evento, String> colHora2;
     
     @FXML
     private TextField txtHora;
@@ -60,6 +71,35 @@ public class IngresoEventosController implements Initializable {
     
      @FXML
     private ImageView ivImagen;
+
+    @FXML
+    private DatePicker dpFechaFiinal;
+
+    @FXML
+    private DatePicker dpFechaInicio;
+
+    @FXML
+    private TextArea txtDescripcion;
+
+
+    @FXML
+    private TextField  txtNombreEvento;
+
+    @FXML
+    private TextField txtPlanA;
+
+    @FXML
+    private TextField txtPlanB;
+
+    @FXML
+    private TextField txtVip;
+
+    @FXML
+    private TextField txtVipMg;
+
+    private String rutaImagen;
+
+
 
     /**
      * Initializes the controller class.
@@ -83,14 +123,16 @@ public class IngresoEventosController implements Initializable {
             String hora = this.txtHora.getText();
             
             // Creo una Fecha
-            evento p = new evento(fecha, hora);
+            evento p = new evento();
+            p.setFecha(fecha);
+            p.setHora(hora);
 
             // Compruebo si la Fecha esta en el lista
             if (!this.evento.contains(p)) {
                 // Lo añado a la lista
                 this.evento.add(p);
                 // Seteo los items
-                this.tblTiempoEveneto.setItems(evento);
+                this.tvFechasEvento.setItems(evento);
             } else {
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -127,6 +169,9 @@ public class IngresoEventosController implements Initializable {
 
         // Mostar la imagen
         if (imgFile != null) {
+            //guardamos la ruta de la imagen en una variable
+            rutaImagen = imgFile.getAbsolutePath();
+
             Image image = new Image("file:" + imgFile.getAbsolutePath());
             ivImagen.setImage(image);
         }
@@ -134,6 +179,38 @@ public class IngresoEventosController implements Initializable {
     
      @FXML
     void registrarEvento(ActionEvent event) {
+         evento eventoObj = new evento();
 
+
+         /*
+         eventoObj.setNombreEvento(txtNombreEvento.getText());
+         eventoObj.setSinopsis(txtDescripcion.getText());
+         eventoObj.setFechaInicioVisible(dpFechaInicio.getValue().toString());
+         eventoObj.setFechaFinalVisible((dpFechaFiinal.getValue().toString()));
+         eventoObj.setPrecioVIPMG(Float.parseFloat(txtVipMg.getText()));
+         eventoObj.setVIP(Float.parseFloat(txtVip.getText()));
+         eventoObj.setPantlaA(Float.parseFloat(txtPlanA.getText()));
+         eventoObj.setPlantaB(Float.parseFloat(txtPlanA.getText()));
+
+         */
+
+         //Metemos las fechas en un array
+         ArrayList<evento> eventosArray = new ArrayList<>();
+         ObservableList<evento> items = tvFechasEvento.getItems(); // Obtiene la lista de elementos de la TableView
+
+         for (evento evento : items) {
+             eventosArray.add(evento); // Agrega cada evento a la lista
+         }
+
+         // Obtener la imagen del ImageView
+       /*
+         for (evento evento : items) {
+             String fecha = (String) colFecha.getCellData(evento); // Obtiene el valor de la columna "Fecha" para cada Evento
+             String hora = (String) colHora.getCellData(evento); // Obtiene el valor de la columna "Hora" para cada Evento
+             System.out.println("Fecha: " + fecha + ", Hora: " + hora); // Imprime los valores de la columna "Fecha" y "Hora"
+         }
+*/
+
+         
     }
 }

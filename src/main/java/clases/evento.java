@@ -21,12 +21,90 @@ public class evento {
     
     private String fechaInicioVisible;
     private String fechaFinalVisible;
+    private float precioVIPMG;
+    private float VIP;
+    private float PantlaA;
+    private float PlantaB;
+
+    private String linkImg;
+
+    public String getLinkImg() {
+        return linkImg;
+    }
+
+    public void setLinkImg(String linkImg) {
+        this.linkImg = linkImg;
+    }
+
+    public String getNombreEvento() {
+        return nombreEvento;
+    }
+
+    public void setNombreEvento(String nombreEvento) {
+        this.nombreEvento = nombreEvento;
+    }
+
+    public String getSinopsis() {
+        return sinopsis;
+    }
+
+    public void setSinopsis(String sinopsis) {
+        this.sinopsis = sinopsis;
+    }
+
+    public String getFechaInicioVisible() {
+        return fechaInicioVisible;
+    }
+
+    public void setFechaInicioVisible(String fechaInicioVisible) {
+        this.fechaInicioVisible = fechaInicioVisible;
+    }
+
+    public String getFechaFinalVisible() {
+        return fechaFinalVisible;
+    }
+
+    public void setFechaFinalVisible(String fechaFinalVisible) {
+        this.fechaFinalVisible = fechaFinalVisible;
+    }
+
+    public float getPrecioVIPMG() {
+        return precioVIPMG;
+    }
+
+    public void setPrecioVIPMG(float precioVIPMG) {
+        this.precioVIPMG = precioVIPMG;
+    }
+
+    public float getVIP() {
+        return VIP;
+    }
+
+    public void setVIP(float VIP) {
+        this.VIP = VIP;
+    }
+
+    public float getPantlaA() {
+        return PantlaA;
+    }
+
+    public void setPantlaA(float PantlaA) {
+        this.PantlaA = PantlaA;
+    }
+
+    public float getPlantaB() {
+        return PlantaB;
+    }
+
+    public void setPlantaB(float PlantaB) {
+        this.PlantaB = PlantaB;
+    }
     
-    private decimal precioVIP_M&G;
-     public evento(String Fecha, String Hora) {
+    
+     /*public evento(String Fecha, String Hora) {
         this.fecha = Fecha;
         this.hora = Hora;
-    }
+    }*/
 
     @Override
     public int hashCode() {
