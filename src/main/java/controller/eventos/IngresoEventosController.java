@@ -16,6 +16,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javafx.stage.StageStyle;
+import model.eventoModelo;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -99,6 +101,7 @@ public class IngresoEventosController implements Initializable {
 
     private String rutaImagen;
 
+    private eventoModelo eventoModeloObj = new eventoModelo();
 
 
     /**
@@ -181,8 +184,6 @@ public class IngresoEventosController implements Initializable {
     void registrarEvento(ActionEvent event) {
          evento eventoObj = new evento();
 
-
-         /*
          eventoObj.setNombreEvento(txtNombreEvento.getText());
          eventoObj.setSinopsis(txtDescripcion.getText());
          eventoObj.setFechaInicioVisible(dpFechaInicio.getValue().toString());
@@ -192,25 +193,48 @@ public class IngresoEventosController implements Initializable {
          eventoObj.setPantlaA(Float.parseFloat(txtPlanA.getText()));
          eventoObj.setPlantaB(Float.parseFloat(txtPlanA.getText()));
 
-         */
-
          //Metemos las fechas en un array
          ArrayList<evento> eventosArray = new ArrayList<>();
          ObservableList<evento> items = tvFechasEvento.getItems(); // Obtiene la lista de elementos de la TableView
-
          for (evento evento : items) {
              eventosArray.add(evento); // Agrega cada evento a la lista
          }
 
-         // Obtener la imagen del ImageView
-       /*
-         for (evento evento : items) {
-             String fecha = (String) colFecha.getCellData(evento); // Obtiene el valor de la columna "Fecha" para cada Evento
-             String hora = (String) colHora.getCellData(evento); // Obtiene el valor de la columna "Hora" para cada Evento
-             System.out.println("Fecha: " + fecha + ", Hora: " + hora); // Imprime los valores de la columna "Fecha" y "Hora"
-         }
-*/
+         boolean respuesta= eventoModeloObj.registrarEvento(eventoObj,eventosArray);
 
-         
+         if (respuesta) {
+             //Para que muestre una alerta de informacion
+             Alert alert = new Alert(Alert.AlertType.INFORMATION);
+             alert.setTitle("Exito");
+             alert.setHeaderText(null);
+             alert.setContentText("Se registro correctamente.");
+             alert.initStyle(StageStyle.UTILITY);
+             alert.showAndWait();
+
+             limpiarCampos();
+         } else {
+             Alert alert = new Alert(Alert.AlertType.ERROR);
+             alert.setTitle("Error");
+             alert.setHeaderText(null);
+             alert.setContentText("Algo salio mal.");
+             alert.initStyle(StageStyle.UTILITY);
+             alert.showAndWait();
+         }
+
+
+    }
+
+    public void limpiarCampos(){
+        txtNombreEvento.setText("");
+        txtDescripcion.setText("");
+        txtHora.setText("");
+        txtVipMg.setText("");
+        txtPlanA.setText("");
+        txtPlanB.setText("");
+        txtVip.setText("");
+        dpFechaFiinal.setValue(null);
+        dpFechaInicio.setValue(null);
+        dpFecha.setValue(null);
+        tvFechasEvento.getItems().clear();
     }
 }
