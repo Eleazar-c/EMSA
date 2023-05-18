@@ -10,6 +10,8 @@ module com.proyect.emsa {
     opens controller.usuario to javafx.fxml;
     opens controller.eventos to javafx.fxml;
     opens controller.home to javafx.fxml;
+    opens controller.login to javafx.fxml;
+
 
     opens clases to javafx.base;
 }
