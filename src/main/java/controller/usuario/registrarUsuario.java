@@ -14,6 +14,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.usuarioModel;
 import clases.usuario;
+import com.proyect.emsa.App;
+import java.io.IOException;
 import java.sql.ResultSet;
 import javafx.event.ActionEvent;
 import javafx.stage.StageStyle;
@@ -121,5 +123,11 @@ public class registrarUsuario implements Initializable{
         txtCorreo.setText("");
         txtpassword.setText("");
         cboRol.getSelectionModel().select(0);
+    }
+    
+    @FXML
+    void btnCancelar_clic(ActionEvent event) throws IOException {
+        App appObj = new App();
+        appObj.setRoot("Inicio");
     }
 }

@@ -6,6 +6,7 @@ package controller.eventos;
 
 import clases.evento;
 
+import com.proyect.emsa.App;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -47,6 +48,9 @@ public class IngresoEventosController implements Initializable {
 
     @FXML
     private Button btnRegistrar;
+
+    @FXML
+    private Button btnCancelar;
 
     @FXML
     private TableView<evento> tvFechasEvento;
@@ -236,5 +240,11 @@ public class IngresoEventosController implements Initializable {
         dpFechaInicio.setValue(null);
         dpFecha.setValue(null);
         tvFechasEvento.getItems().clear();
+    }
+
+    @FXML
+    void btnCancelar_clic(ActionEvent event) throws IOException {
+        App appObj = new App();
+        appObj.setRoot("Inicio");
     }
 }

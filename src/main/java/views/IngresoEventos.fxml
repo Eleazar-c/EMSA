@@ -15,40 +15,35 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="565.0" prefWidth="758.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.eventos.IngresoEventosController">
+<AnchorPane id="AnchorPane" prefHeight="665.0" prefWidth="858.0" style="-fx-background-color: #f5f4d7;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.eventos.IngresoEventosController">
     <stylesheets>
         <URL value="@/style/ingresoeventos.css" />
     </stylesheets>
    <children>
-      <Label layoutX="41.0" layoutY="26.0" text="Registrar evento">
-         <font>
-            <Font size="38.0" />
-         </font>
-      </Label>
-      <Label layoutX="41.0" layoutY="99.0" text="Nombre del evento:" />
-      <Label layoutX="42.0" layoutY="164.0" text="Sinopsis del evento:" />
-      <TextField fx:id="txtNombreEvento" layoutX="41.0" layoutY="126.0" prefHeight="25.0" prefWidth="267.0" />
-      <TextArea fx:id="txtDescripcion" layoutX="41.0" layoutY="189.0" prefHeight="200.0" prefWidth="274.0" />
-      <Label layoutX="429.0" layoutY="126.0" text="Precio de los boletos:" />
-      <Label layoutX="430.0" layoutY="153.0" text="VIP+M&amp;G:" />
-      <Label layoutX="438.0" layoutY="199.0" text="VIP:" />
-      <Label layoutX="596.0" layoutY="153.0" text="Platea A:" />
-      <Label layoutX="597.0" layoutY="199.0" text="Platea B:" />
-      <TextField fx:id="txtVipMg" layoutX="496.0" layoutY="149.0" prefHeight="25.0" prefWidth="68.0" />
-      <TextField fx:id="txtVip" layoutX="496.0" layoutY="195.0" prefHeight="25.0" prefWidth="68.0" />
-      <TextField fx:id="txtPlanA" layoutX="658.0" layoutY="149.0" prefHeight="25.0" prefWidth="68.0" />
-      <TextField fx:id="txtPlanB" layoutX="658.0" layoutY="195.0" prefHeight="25.0" prefWidth="68.0" />
-      <DatePicker fx:id="dpFechaInicio" layoutX="483.0" layoutY="35.0" prefHeight="25.0" prefWidth="132.0" />
-      <Label layoutX="424.0" layoutY="9.0" text="Fecha Visible:" />
-      <Label layoutX="429.0" layoutY="39.0" text="Inicio:" />
-      <Label layoutX="429.0" layoutY="78.0" text="Fin:" />
-      <DatePicker fx:id="dpFechaFiinal" layoutX="483.0" layoutY="74.0" prefHeight="25.0" prefWidth="132.0" />
-      <DatePicker fx:id="dpFecha" layoutX="440.0" layoutY="248.0" prefHeight="25.0" prefWidth="132.0" />
-      <TextField fx:id="txtHora" layoutX="586.0" layoutY="248.0" />
-      <Label layoutX="586.0" layoutY="225.0" text="Hora:" />
-      <Label layoutX="436.0" layoutY="225.0" text="Fecha del evento:" />
-      <Button fx:id="agregar" layoutX="440.0" layoutY="297.0" mnemonicParsing="false" onAction="#btnAgregarFecha" text="Agregar" />
-      <TableView fx:id="tvFechasEvento" layoutX="440.0" layoutY="336.0" prefHeight="200.0" prefWidth="254.0">
+      <Label layoutX="44.0" layoutY="96.0" text="Nombre del evento:" />
+      <Label layoutX="42.0" layoutY="165.0" text="Sinopsis del evento:" />
+      <TextField fx:id="txtNombreEvento" layoutX="44.0" layoutY="123.0" prefHeight="25.0" prefWidth="267.0" />
+      <TextArea fx:id="txtDescripcion" layoutX="41.0" layoutY="190.0" prefHeight="200.0" prefWidth="274.0" />
+      <Label layoutX="429.0" layoutY="190.0" text="Precio de los boletos:" />
+      <Label layoutX="428.0" layoutY="231.0" text="VIP+M&amp;G:" />
+      <Label layoutX="438.0" layoutY="289.0" text="VIP:" />
+      <Label layoutX="650.0" layoutY="231.0" text="Platea A:" />
+      <Label layoutX="651.0" layoutY="289.0" text="Platea B:" />
+      <TextField fx:id="txtVipMg" layoutX="494.0" layoutY="227.0" prefHeight="25.0" prefWidth="72.0" />
+      <TextField fx:id="txtVip" layoutX="499.0" layoutY="285.0" prefHeight="25.0" prefWidth="72.0" />
+      <TextField fx:id="txtPlanA" layoutX="721.0" layoutY="227.0" prefHeight="25.0" prefWidth="68.0" />
+      <TextField fx:id="txtPlanB" layoutX="721.0" layoutY="285.0" prefHeight="25.0" prefWidth="68.0" />
+      <DatePicker fx:id="dpFechaInicio" layoutX="428.0" layoutY="137.0" prefHeight="25.0" prefWidth="149.0" />
+      <Label layoutX="428.0" layoutY="96.0" text="Fecha Visible:" />
+      <Label layoutX="433.0" layoutY="120.0" text="Inicio:" />
+      <Label layoutX="649.0" layoutY="120.0" text="Fin:" />
+      <DatePicker fx:id="dpFechaFiinal" layoutX="649.0" layoutY="137.0" prefHeight="25.0" prefWidth="143.0" />
+      <DatePicker fx:id="dpFecha" layoutX="436.0" layoutY="354.0" prefHeight="25.0" prefWidth="132.0" />
+      <TextField fx:id="txtHora" layoutX="647.0" layoutY="355.0" />
+      <Label layoutX="647.0" layoutY="332.0" text="Hora:" />
+      <Label layoutX="432.0" layoutY="331.0" text="Fecha del evento:" />
+      <Button fx:id="agregar" layoutX="489.0" layoutY="401.0" mnemonicParsing="false" onAction="#btnAgregarFecha" text="Agregar" />
+      <TableView fx:id="tvFechasEvento" layoutX="499.0" layoutY="433.0" prefHeight="200.0" prefWidth="274.0">
         <columns>
             <TableColumn fx:id="colFecha" prefWidth="142.0" text="Fecha" />
             <TableColumn fx:id="colHora" minWidth="8.0" prefWidth="111.0" text="Hora" />
@@ -62,9 +57,18 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
-      <ImageView fx:id="ivImagen" fitHeight="94.0" fitWidth="132.0" layoutX="42.0" layoutY="457.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btnBuscar" layoutX="42.0" layoutY="402.0" mnemonicParsing="false" onAction="#subirImaggen" text="Subir imagen" />
-      <Button fx:id="btnRegistrar" layoutX="231.0" layoutY="511.0" mnemonicParsing="false" onAction="#registrarEvento" text="Agreagar" />
-      <Button layoutX="356.0" layoutY="511.0" mnemonicParsing="false" text="Cancelar" />
+      <ImageView fx:id="ivImagen" fitHeight="200.0" fitWidth="206.0" layoutX="32.0" layoutY="440.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="btnBuscar" layoutX="42.0" layoutY="401.0" mnemonicParsing="false" onAction="#subirImaggen" text="Subir imagen" />
+      <Button fx:id="btnCancelar" layoutX="405.0" layoutY="593.0" mnemonicParsing="false" onAction="#btnCancelar_clic" text="Cancelar" />
+      <Button fx:id="btnRegistrar" layoutX="311.0" layoutY="593.0" mnemonicParsing="false" onAction="#registrarEvento" text="Agreagar" />
+      <AnchorPane prefHeight="55.0" prefWidth="858.0" style="-fx-background-color: #951f2b;">
+         <children>
+            <Label layoutX="14.0" layoutY="2.0" text="Registrar evento" textFill="WHITE">
+               <font>
+                  <Font size="38.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

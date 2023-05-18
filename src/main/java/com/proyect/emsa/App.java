@@ -24,7 +24,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        scene = new Scene(loadFXML("IngresoEventos"), 758, 565);
+        scene = new Scene(loadFXML("Inicio"), 858, 665);
         stage.setScene(scene);
          //stage.setMaximized(true);
         stage.show();
@@ -53,11 +53,11 @@ public class App extends Application {
 
     }
      */
-    static void setRoot(String fxml) throws IOException {
+    public void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
-    private static Parent loadFXML(String fxml) {
+    public Parent loadFXML(String fxml) {
         try{
         String projectDir = System.getProperty("user.dir");
         URL ProjectRoot = Paths.get(projectDir + "/src/main/java/views/" + fxml + ".fxml").toUri().toURL();

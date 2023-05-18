@@ -8,13 +8,14 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.usuario.registrarUsuario">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="656.0" prefWidth="858.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.usuario.registrarUsuario">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -23,9 +24,14 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #f5f4d7;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <children>
-            <Label prefHeight="62.0" prefWidth="459.0" text="REGISTRO DE USUARIO" />
+            <AnchorPane prefHeight="53.0" prefWidth="429.0" style="-fx-background-color: #951f2b;" />
+            <Label prefHeight="50.0" prefWidth="400.0" text="   REGISTRO DE USUARIO">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
             <Label text="Nombre Usuario:">
                <font>
                   <Font size="18.0" />
@@ -101,12 +107,12 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#btnGuardarOnAction" prefHeight="37.0" prefWidth="112.0" style="-fx-background-color: #71E752; -fx-background-radius: 15;" text="Registra" textFill="WHITE" GridPane.hgrow="ALWAYS">
+                  <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#btnGuardarOnAction" prefHeight="37.0" prefWidth="112.0" text="Registra" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <font>
                         <Font name="Times New Roman" size="20.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="23.0" prefWidth="99.0" style="-fx-background-color: #FD2B3B; -fx-background-radius: 15;" text="Cancelar" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#btnCancelar_clic" prefHeight="23.0" prefWidth="99.0" text="Cancelar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <font>
                         <Font name="Times New Roman" size="20.0" />
                      </font>
@@ -126,7 +132,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fitHeight="401.0" fitWidth="299.0" pickOnBounds="true">
+            <ImageView fitHeight="659.0" fitWidth="430.0" pickOnBounds="true" smooth="false">
                <image>
                   <Image url="@../../resources/img/registerUser.jpg" />
                </image>
