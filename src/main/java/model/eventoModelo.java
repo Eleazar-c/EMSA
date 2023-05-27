@@ -1,19 +1,26 @@
 package model;
+
 import clases.evento;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class eventoModelo {
 
     private conexion connPosgres;
 
-    public eventoModelo(){
-        this.connPosgres= new conexion();
+    public eventoModelo() {
+        this.connPosgres = new conexion();
     }
+
     public ResultSet ejecutarConsulta(String consulta) {
         try {
             Statement conn = this.connPosgres.getConection().createStatement();
@@ -23,7 +30,8 @@ public class eventoModelo {
             return null;
         }
     }
-    public boolean registrarEvento(evento evento,ArrayList<evento> eventosArray){
+
+    public boolean registrarEvento(evento evento, ArrayList<evento> eventosArray) {
 
         try {
             String SQL = "INSERT INTO evento(\"nombreevento\", \"descripcion\", \"fechainicio\", \"fechafinal\", \"img\", \"vip\", \"plant_a\", \"plan_b\", \"vipmg\") "
@@ -33,22 +41,29 @@ public class eventoModelo {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             PreparedStatement sentencia = connection.prepareStatement(SQL);
 
-            sentencia.setString(1, evento.getNombreEvento() );
+            sentencia.setString(1, evento.getNombreEvento());
             sentencia.setString(2, evento.getSinopsis());
 
             // Convertir java.util.Date a java.sql.Date
-            java.util.Date fechaInicio = dateFormat.parse(evento.getFechaInicioVisible());
-            java.sql.Date fechaInicioSQL = new java.sql.Date(fechaInicio.getTime());
-            sentencia.setDate(3, fechaInicioSQL);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
-            java.util.Date fechaFinal = dateFormat.parse(evento.getFechaFinalVisible());
-            java.sql.Date fechaFinalSQL = new java.sql.Date(fechaFinal.getTime());
-            sentencia.setDate(4, fechaFinalSQL);
-            sentencia.setString(5,evento.getLinkImg());
-            sentencia.setFloat(6,evento.getVIP());
-            sentencia.setFloat(7,evento.getPantlaA());
-            sentencia.setFloat(8,evento.getPlantaB());
-            sentencia.setFloat(9,evento.getPrecioVIPMG());
+            LocalDateTime fechaInicio = evento.getFechaInicioVisible();
+            ZonedDateTime zonaFechaHora = fechaInicio.atZone(ZoneId.systemDefault());
+            Instant instant = zonaFechaHora.toInstant(); // Convierte a Instant
+            Date fechaI = (Date) Date.from(instant); // Convierte a Date
+            sentencia.setDate(3, fechaI);
+            
+            LocalDateTime fechaFinal = evento.getFechaFinalVisible();
+            ZonedDateTime zonaFechaHoraFinal = fechaFinal.atZone(ZoneId.systemDefault());
+            Instant instant2 = zonaFechaHoraFinal.toInstant(); // Convierte a Instant
+            Date fechaF = (Date) Date.from(instant2); // Convierte a Date
+
+            sentencia.setDate(4, fechaF);
+            sentencia.setString(5, evento.getLinkImg());
+            sentencia.setFloat(6, evento.getVIP());
+            sentencia.setFloat(7, evento.getPantlaA());
+            sentencia.setFloat(8, evento.getPlantaB());
+            sentencia.setFloat(9, evento.getPrecioVIPMG());
 
             sentencia.executeUpdate();
 
@@ -76,7 +91,7 @@ public class eventoModelo {
 
         } catch (Exception e) {
             System.err.println("Ocurrio un error al registrar la tarea.");
-            System.err.println("Mensaje del error: "+ e.getMessage());
+            System.err.println("Mensaje del error: " + e.getMessage());
             System.err.println("Detalle del error: ");
             e.printStackTrace();
             return false;

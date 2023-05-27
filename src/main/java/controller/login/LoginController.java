@@ -5,14 +5,18 @@
 package controller.login;
 
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+
+import clases.Rol;
+import clases.login;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import model.modelo;
+import clases.SessionSistema;
 
 /**
  * FXML Controller class
@@ -41,6 +45,47 @@ public class LoginController implements Initializable {
     
      @FXML
     void btnIngresar_clic(ActionEvent event) {
+        String usuario = txtUsuario.getText();
+        String clave = txtclave.getText();
+        boolean valor = true;
+
+         login loginObj = new login();
+
+         loginObj.setUsuario(usuario);
+         loginObj.setClave(clave);
+
+         SessionSistema sessionObj = new SessionSistema();
+         modelo modeloObj = new modelo();
+         try {
+             ResultSet datosUsuario = modeloObj.ejecutarConsulta("SELECT codigousuario,Nombre,usuario,clave,codigorol,correo,estado FROM USUARIO WHERE usuario= "+ usuario+" AND clave= "+clave);
+             while (datosUsuario.next()) {
+                 String usuarioCliente = datosUsuario.getString("usuario");
+                 String claveCliente = datosUsuario.getString("clave");
+
+                 if (usuarioCliente!= usuario){
+                    valor= false;
+                    break;
+                 }
+
+                 if (claveCliente == clave){
+                     valor = false;
+                     break;
+                 }
+
+                 String nombreCompleto = datosUsuario.getString("nombre");
+                 String correo = datosUsuario.getString("correo");
+                 String codRol = datosUsuario.getString("codigorol");
+                 String codigoEstado = datosUsuario.getString("codigoestado");
+                 int CodigoUsuario = datosUsuario.getInt("codigousuario");
+
+             }
+             if(valor){
+             }
+         }catch (SQLException ex){
+
+         }
+
+
 
     }
 

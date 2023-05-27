@@ -4,6 +4,7 @@
  */
 package clases;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -15,16 +16,54 @@ public class evento {
     private String fecha;
 
     private String hora;
-    
+
     private String nombreEvento;
     private String sinopsis;
-    
-    private String fechaInicioVisible;
-    private String fechaFinalVisible;
+
+    private LocalDateTime fechaInicioVisible;
+    private LocalDateTime  fechaFinalVisible;
+    private LocalDateTime fechainicio;
+    private LocalDateTime fechaFinal;
+
+    public LocalDateTime getFechainicio() {
+        return fechainicio;
+    }
+
+    public void setFechainicio(LocalDateTime fechainicio) {
+        this.fechainicio = fechainicio;
+    }
+
+    public LocalDateTime getFechaFinal() {
+        return fechaFinal;
+    }
+
+    public void setFechaFinal(LocalDateTime fechaFinal) {
+        this.fechaFinal = fechaFinal;
+    }
+
     private float precioVIPMG;
     private float VIP;
     private float PantlaA;
     private float PlantaB;
+    private int codigEvento;
+    private int responsable;
+
+    public int getResponsable() {
+        return responsable;
+    }
+
+    public void setResponsable(int responsable) {
+        this.responsable = responsable;
+    }
+    
+
+    public int getCodigEvento() {
+        return codigEvento;
+    }
+
+    public void setCodigEvento(int codigEvento) {
+        this.codigEvento = codigEvento;
+    }
 
     private String linkImg;
 
@@ -52,19 +91,19 @@ public class evento {
         this.sinopsis = sinopsis;
     }
 
-    public String getFechaInicioVisible() {
+    public LocalDateTime getFechaInicioVisible() {
         return fechaInicioVisible;
     }
 
-    public void setFechaInicioVisible(String fechaInicioVisible) {
+    public void setFechaInicioVisible(LocalDateTime fechaInicioVisible) {
         this.fechaInicioVisible = fechaInicioVisible;
     }
 
-    public String getFechaFinalVisible() {
+    public LocalDateTime getFechaFinalVisible() {
         return fechaFinalVisible;
     }
 
-    public void setFechaFinalVisible(String fechaFinalVisible) {
+    public void setFechaFinalVisible(LocalDateTime fechaFinalVisible) {
         this.fechaFinalVisible = fechaFinalVisible;
     }
 
@@ -99,13 +138,11 @@ public class evento {
     public void setPlantaB(float PlantaB) {
         this.PlantaB = PlantaB;
     }
-    
-    
-     /*public evento(String Fecha, String Hora) {
+
+    /*public evento(String Fecha, String Hora) {
         this.fecha = Fecha;
         this.hora = Hora;
     }*/
-
     @Override
     public int hashCode() {
         int hash = 7;

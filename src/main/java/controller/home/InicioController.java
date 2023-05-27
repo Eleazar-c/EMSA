@@ -41,7 +41,8 @@ public class InicioController implements Initializable {
     }
 
     @FXML
-    void btnEventosClic(ActionEvent event) {
+    void btnEventosClic(ActionEvent event) throws IOException {
+        appobj.setRoot("ListaEvento");
 
     }
 

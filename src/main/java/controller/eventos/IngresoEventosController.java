@@ -29,6 +29,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -42,7 +43,7 @@ public class IngresoEventosController implements Initializable {
 
     @FXML
     private Button agregar;
-    
+
     @FXML
     private Button btnBuscar;
 
@@ -55,7 +56,7 @@ public class IngresoEventosController implements Initializable {
     @FXML
     private TableView<evento> tvFechasEvento;
 
-     @FXML
+    @FXML
     private TableColumn colFecha;
 
     @FXML
@@ -66,7 +67,7 @@ public class IngresoEventosController implements Initializable {
 
     @FXML
     private TableColumn<evento, String> colHora2;
-    
+
     @FXML
     private TextField txtHora;
 
@@ -74,8 +75,8 @@ public class IngresoEventosController implements Initializable {
     private DatePicker dpFecha;
 
     private ObservableList<evento> evento;
-    
-     @FXML
+
+    @FXML
     private ImageView ivImagen;
 
     @FXML
@@ -87,9 +88,8 @@ public class IngresoEventosController implements Initializable {
     @FXML
     private TextArea txtDescripcion;
 
-
     @FXML
-    private TextField  txtNombreEvento;
+    private TextField txtNombreEvento;
 
     @FXML
     private TextField txtPlanA;
@@ -104,9 +104,9 @@ public class IngresoEventosController implements Initializable {
     private TextField txtVipMg;
 
     private String rutaImagen;
-
+    private String nombreImagen;
+    private String rutaFinalArchivo;
     private eventoModelo eventoModeloObj = new eventoModelo();
-
 
     /**
      * Initializes the controller class.
@@ -122,13 +122,13 @@ public class IngresoEventosController implements Initializable {
     }
 
     @FXML
-      void btnAgregarFecha(ActionEvent event) {
+    void btnAgregarFecha(ActionEvent event) {
         try {
 
             // Obtengo los datos del formulario
             String fecha = this.dpFecha.getValue().toString();
             String hora = this.txtHora.getText();
-            
+
             // Creo una Fecha
             evento p = new evento();
             p.setFecha(fecha);
@@ -161,7 +161,8 @@ public class IngresoEventosController implements Initializable {
 
     @FXML
     void subirImaggen(ActionEvent event) {
-         FileChooser fileChooser = new FileChooser();
+        /*
+        FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Buscar Imagen");
 
         // Agregar filtros para facilitar la busqueda
@@ -173,62 +174,157 @@ public class IngresoEventosController implements Initializable {
 
         // Obtener la imagen seleccionada
         File imgFile = fileChooser.showOpenDialog(null);
-
+        String nombreImagen = imgFile.getName();
+        this.nombreImagen = nombreImagen;
         // Mostar la imagen
         if (imgFile != null) {
+
             //guardamos la ruta de la imagen en una variable
             rutaImagen = imgFile.getAbsolutePath();
 
-            Image image = new Image("file:" + imgFile.getAbsolutePath());
-            ivImagen.setImage(image);
+            try {
+                FileInputStream inputStream = new FileInputStream(imgFile);
+                inputStream.close();
+                
+                Image image = new Image("file:" + imgFile.getAbsolutePath());
+                ivImagen.setImage(image);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+         */
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Buscar Imagen");
+
+        // Agregar filtros para facilitar la búsqueda
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All Images", "*.*"),
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG", "*.png")
+        );
+
+        // Obtener la imagen seleccionada
+        File imgFile = fileChooser.showOpenDialog(null);
+        String nombreImagen = imgFile.getName();
+        this.nombreImagen = nombreImagen;
+
+        if (imgFile != null) {
+            try (FileInputStream inputStream = new FileInputStream(imgFile)){
+                File tempDir = new File(System.getProperty("java.io.tmpdir"));
+                File tempFile = File.createTempFile("temp", imgFile.getName(), tempDir);
+                rutaImagen = tempFile.getAbsolutePath();
+
+                // Copiar la imagen seleccionada al archivo temporal
+                Files.copy(imgFile.toPath(), tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+                Image image = new Image("file:" + imgFile.getAbsolutePath());
+                ivImagen.setImage(image);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        // Guardar la imagen en una ruta temporal
+
+    }
+
+    private String saveImage(String path, String nombre) {
+        String pathResource = System.getProperty("user.dir");
+        String RutaRelativa = pathResource + "/src/main/resources/img/" + nombre;
+        this.rutaFinalArchivo = "/src/main/resources/img/" + nombre;
+        Path source = Paths.get(path);
+        Path target = Paths.get(pathResource, "/src/main/resources/img/" + nombre);
+        ivImagen.setImage(null);
+        System.out.println("Source: "+source);
+
+        System.out.println("Tarjet: "+target);
+        try {
+            Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
+            return RutaRelativa;
+        } catch (IOException ex) {
+            System.out.println("Error al Guardar la Imagen: " + ex.getMessage());
+            return "";
         }
     }
-    
-     @FXML
+
+    @FXML
     void registrarEvento(ActionEvent event) {
-         evento eventoObj = new evento();
+        evento eventoObj = new evento();
 
-         eventoObj.setNombreEvento(txtNombreEvento.getText());
-         eventoObj.setSinopsis(txtDescripcion.getText());
-         eventoObj.setFechaInicioVisible(dpFechaInicio.getValue().toString());
-         eventoObj.setFechaFinalVisible((dpFechaFiinal.getValue().toString()));
-         eventoObj.setPrecioVIPMG(Float.parseFloat(txtVipMg.getText()));
-         eventoObj.setVIP(Float.parseFloat(txtVip.getText()));
-         eventoObj.setPantlaA(Float.parseFloat(txtPlanA.getText()));
-         eventoObj.setPlantaB(Float.parseFloat(txtPlanA.getText()));
+        eventoObj.setNombreEvento(txtNombreEvento.getText());
+        eventoObj.setSinopsis(txtDescripcion.getText());
+        eventoObj.setFechaInicioVisible( dpFechaInicio.getValue().atStartOfDay());
+        eventoObj.setFechaFinalVisible(dpFechaFiinal.getValue().atStartOfDay());
+        eventoObj.setPrecioVIPMG(Float.parseFloat(txtVipMg.getText()));
+        eventoObj.setVIP(Float.parseFloat(txtVip.getText()));
+        eventoObj.setPantlaA(Float.parseFloat(txtPlanA.getText()));
+        eventoObj.setPlantaB(Float.parseFloat(txtPlanA.getText()));
+        /*
+        eventoObj.setLinkImg(saveImage(rutaImagen, nombreImagen));
+        if (eventoObj.getLinkImg() == "") {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Algo salio mal.");
+            alert.initStyle(StageStyle.UTILITY);
+            alert.showAndWait();
+            return;
+        }
+         */
+        if (rutaImagen != null && nombreImagen != null) {
+            String rutaFinal = saveImage(rutaImagen, nombreImagen);
+            if (rutaFinal.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Algo salió mal al guardar la imagen.");
+                alert.initStyle(StageStyle.UTILITY);
+                alert.showAndWait();
+                return;
+            }
+            eventoObj.setLinkImg(this.rutaFinalArchivo);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Debes seleccionar una imagen.");
+            alert.initStyle(StageStyle.UTILITY);
+            alert.showAndWait();
+            return;
+        }
+        //Metemos las fechas en un array
+        ArrayList<evento> eventosArray = new ArrayList<>();
+        ObservableList<evento> items = tvFechasEvento.getItems(); // Obtiene la lista de elementos de la TableView
+        for (evento evento : items) {
+            eventosArray.add(evento); // Agrega cada evento a la lista
+        }
 
-         //Metemos las fechas en un array
-         ArrayList<evento> eventosArray = new ArrayList<>();
-         ObservableList<evento> items = tvFechasEvento.getItems(); // Obtiene la lista de elementos de la TableView
-         for (evento evento : items) {
-             eventosArray.add(evento); // Agrega cada evento a la lista
-         }
+        boolean respuesta = eventoModeloObj.registrarEvento(eventoObj, eventosArray);
 
-         boolean respuesta= eventoModeloObj.registrarEvento(eventoObj,eventosArray);
+        if (respuesta) {
+            this.saveImage(rutaImagen, this.nombreImagen);
+            //Para que muestre una alerta de informacion
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Exito");
+            alert.setHeaderText(null);
+            alert.setContentText("Se registro correctamente.");
+            alert.initStyle(StageStyle.UTILITY);
+            alert.showAndWait();
 
-         if (respuesta) {
-             //Para que muestre una alerta de informacion
-             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-             alert.setTitle("Exito");
-             alert.setHeaderText(null);
-             alert.setContentText("Se registro correctamente.");
-             alert.initStyle(StageStyle.UTILITY);
-             alert.showAndWait();
-
-             limpiarCampos();
-         } else {
-             Alert alert = new Alert(Alert.AlertType.ERROR);
-             alert.setTitle("Error");
-             alert.setHeaderText(null);
-             alert.setContentText("Algo salio mal.");
-             alert.initStyle(StageStyle.UTILITY);
-             alert.showAndWait();
-         }
-
+            limpiarCampos();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Algo salio mal.");
+            alert.initStyle(StageStyle.UTILITY);
+            alert.showAndWait();
+        }
 
     }
 
-    public void limpiarCampos(){
+    public void limpiarCampos() {
         txtNombreEvento.setText("");
         txtDescripcion.setText("");
         txtHora.setText("");
