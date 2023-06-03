@@ -8,12 +8,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import clases.login;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import com.proyect.emsa.App;
+
 
 /**
  * FXML Controller class
@@ -26,6 +28,9 @@ public class InicioController implements Initializable {
     private Button btnEventos;
 
     @FXML
+    private Button btnCerrarSesion;
+
+    @FXML
     private Button btnIngresarEv;
 
     @FXML
@@ -35,9 +40,13 @@ public class InicioController implements Initializable {
     private Label lblNombre;
 
     private App appobj = new App();
+    private login loginObj = new login();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        lblNombre.setText(loginObj.getNombreCompleto());
+        lblNombre.setVisible(true);
+
     }
 
     @FXML
@@ -55,5 +64,15 @@ public class InicioController implements Initializable {
     void btnIngresarEvento_click(ActionEvent event) throws IOException {
         appobj.setRoot("IngresoEventos");
     }
-    
+
+    @FXML
+    void btnCerrarSesion_clic(ActionEvent event) throws IOException {
+        loginObj.setNombreCompleto("");
+        loginObj.setCorreo("");
+        loginObj.setCodRol(0);
+        loginObj.setCodigoUsuario(0);
+        loginObj.setCodigoUsuario(0);
+
+        appobj.setRoot("login");
+    }
 }

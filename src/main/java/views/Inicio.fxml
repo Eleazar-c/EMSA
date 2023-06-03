@@ -39,7 +39,7 @@
             </AnchorPane>
             <AnchorPane layoutX="-3.0" layoutY="52.0" prefHeight="613.0" prefWidth="173.0" style="-fx-background-color: #e0dfb1; -fx-border-color: black;">
                <children>
-                  <Button fx:id="btnEventos" layoutX="3.0" layoutY="164.0" mnemonicParsing="false" onAction="#btnEventosClic" prefHeight="38.0" prefWidth="168.0" style="-fx-background-color: #a5a36c;" text="Eventos" textFill="#f5f5f5">
+                  <Button fx:id="btnEventos" layoutX="3.0" layoutY="164.0" mnemonicParsing="false" onAction="#btnEventosClic" prefHeight="38.0" prefWidth="168.0" style="-fx-background-color: #951f2b;" text="Eventos" textFill="#f5f5f5">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -47,7 +47,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="btnIngresarEv" layoutX="3.0" layoutY="202.0" mnemonicParsing="false" onAction="#btnIngresarEvento_click" prefHeight="44.0" prefWidth="168.0" style="-fx-background-color: #a5a36c;" text="Registrar evento" textFill="WHITE">
+                  <Button fx:id="btnIngresarEv" layoutX="3.0" layoutY="202.0" mnemonicParsing="false" onAction="#btnIngresarEvento_click" prefHeight="44.0" prefWidth="168.0" style="-fx-background-color: #951f2b;" text="Registrar evento" textFill="WHITE">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -64,14 +64,15 @@
                      </image>
                   </ImageView>
                   <Line endX="8.0" layoutX="160.0" layoutY="163.0" startX="-159.0" />
-                  <Button fx:id="btnUsuarioIngresar" layoutX="3.0" layoutY="246.0" mnemonicParsing="false" onAction="#btnIngresarUsuario_clic" prefHeight="52.0" prefWidth="168.0" style="-fx-background-color: #a5a36c;" text="Registrar Usuario" textFill="WHITE">
+                  <Button fx:id="btnUsuarioIngresar" layoutX="3.0" layoutY="246.0" mnemonicParsing="false" onAction="#btnIngresarUsuario_clic" prefHeight="52.0" prefWidth="168.0" style="-fx-background-color: #951f2b;" text="Registrar Usuario" textFill="WHITE">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Button>
+                  <Button fx:id="btnCerrarSesion" layoutX="1.0" layoutY="574.0" mnemonicParsing="false" onAction="#btnCerrarSesion_clic" prefHeight="38.0" prefWidth="171.0" style="-fx-background-color: #951f2b;" text="Cerrar Session" textFill="WHITE" />
                </children>
             </AnchorPane>
-            <Label fx:id="lblNombre" layoutX="179.0" layoutY="58.0" text="Label">
+            <Label fx:id="lblNombre" layoutX="171.0" layoutY="52.0" prefHeight="38.0" prefWidth="64.0" text="Label">
                <font>
                   <Font size="24.0" />
                </font>

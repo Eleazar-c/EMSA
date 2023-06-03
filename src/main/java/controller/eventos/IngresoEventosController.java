@@ -31,6 +31,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -254,8 +255,8 @@ public class IngresoEventosController implements Initializable {
 
         eventoObj.setNombreEvento(txtNombreEvento.getText());
         eventoObj.setSinopsis(txtDescripcion.getText());
-        eventoObj.setFechaInicioVisible( dpFechaInicio.getValue().atStartOfDay());
-        eventoObj.setFechaFinalVisible(dpFechaFiinal.getValue().atStartOfDay());
+        eventoObj.setFechaInicioVisible( Date.valueOf(dpFechaInicio.getValue()));
+        eventoObj.setFechaFinalVisible(Date.valueOf(dpFechaFiinal.getValue()));
         eventoObj.setPrecioVIPMG(Float.parseFloat(txtVipMg.getText()));
         eventoObj.setVIP(Float.parseFloat(txtVip.getText()));
         eventoObj.setPantlaA(Float.parseFloat(txtPlanA.getText()));

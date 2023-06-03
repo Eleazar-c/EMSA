@@ -1,8 +1,6 @@
 package model;
 
 import clases.evento;
-import javafx.collections.ObservableList;
-import javafx.scene.control.TableColumn;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -34,7 +32,7 @@ public class eventoModelo {
     public boolean registrarEvento(evento evento, ArrayList<evento> eventosArray) {
 
         try {
-            String SQL = "INSERT INTO evento(\"nombreevento\", \"descripcion\", \"fechainicio\", \"fechafinal\", \"img\", \"vip\", \"plant_a\", \"plan_b\", \"vipmg\") "
+            String SQL = "INSERT INTO evento(\"nombreevento\", \"descripcion\", \"fechainicio\", \"fechafinal\", \"img\", \"vip\", \"plan_a\", \"plan_b\", \"vipmg\") "
                     + "VALUES (?,?,?,?,?,?,?,?,?)";
 
             Connection connection = this.connPosgres.getConection();
@@ -47,18 +45,12 @@ public class eventoModelo {
             // Convertir java.util.Date a java.sql.Date
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
-            LocalDateTime fechaInicio = evento.getFechaInicioVisible();
-            ZonedDateTime zonaFechaHora = fechaInicio.atZone(ZoneId.systemDefault());
-            Instant instant = zonaFechaHora.toInstant(); // Convierte a Instant
-            Date fechaI = (Date) Date.from(instant); // Convierte a Date
-            sentencia.setDate(3, fechaI);
+            Date fechaInicio = (Date) evento.getFechaInicioVisible();
+            sentencia.setDate(3, fechaInicio);
             
-            LocalDateTime fechaFinal = evento.getFechaFinalVisible();
-            ZonedDateTime zonaFechaHoraFinal = fechaFinal.atZone(ZoneId.systemDefault());
-            Instant instant2 = zonaFechaHoraFinal.toInstant(); // Convierte a Instant
-            Date fechaF = (Date) Date.from(instant2); // Convierte a Date
+            Date fechaFinal = (Date) evento.getFechaFinalVisible();
 
-            sentencia.setDate(4, fechaF);
+            sentencia.setDate(4, fechaFinal);
             sentencia.setString(5, evento.getLinkImg());
             sentencia.setFloat(6, evento.getVIP());
             sentencia.setFloat(7, evento.getPantlaA());

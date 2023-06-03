@@ -4,6 +4,7 @@
  */
 package controller.login;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,10 +12,12 @@ import java.util.ResourceBundle;
 
 import clases.Rol;
 import clases.login;
+import com.proyect.emsa.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.stage.StageStyle;
 import model.modelo;
 import clases.SessionSistema;
 
@@ -57,37 +60,48 @@ public class LoginController implements Initializable {
          SessionSistema sessionObj = new SessionSistema();
          modelo modeloObj = new modelo();
          try {
-             ResultSet datosUsuario = modeloObj.ejecutarConsulta("SELECT codigousuario,Nombre,usuario,clave,codigorol,correo,estado FROM USUARIO WHERE usuario= "+ usuario+" AND clave= "+clave);
+             ResultSet datosUsuario = modeloObj.ejecutarConsulta("SELECT codigousuario,Nombre,usuario,clave,codigorol,correo,codigoestado FROM USUARIO WHERE usuario= '"+ usuario+"' AND clave= '"+clave+"'");
              while (datosUsuario.next()) {
                  String usuarioCliente = datosUsuario.getString("usuario");
                  String claveCliente = datosUsuario.getString("clave");
 
-                 if (usuarioCliente!= usuario){
+                 if (!usuarioCliente.trim().equals(usuario)){
                     valor= false;
                     break;
                  }
 
-                 if (claveCliente == clave){
+                 if (!claveCliente.trim() .equals(clave.trim())){
                      valor = false;
                      break;
                  }
 
-                 String nombreCompleto = datosUsuario.getString("nombre");
-                 String correo = datosUsuario.getString("correo");
-                 String codRol = datosUsuario.getString("codigorol");
-                 String codigoEstado = datosUsuario.getString("codigoestado");
-                 int CodigoUsuario = datosUsuario.getInt("codigousuario");
+                 loginObj.setNombreCompleto(datosUsuario.getString("nombre"));
+                 loginObj.setCorreo(datosUsuario.getString("correo"));
+                 loginObj.setCodRol(datosUsuario.getInt("codigorol"));
+                 loginObj.setCodigoUsuario( datosUsuario.getInt("codigoestado"));
+                 loginObj.setCodigoUsuario(datosUsuario.getInt("codigousuario"));
+
+                 App appObj = new App();
+                 appObj.setRoot("Inicio");
+                 return;
 
              }
-             if(valor){
+             if(!valor){
+                 Alert alert = new Alert(Alert.AlertType.ERROR);
+                 alert.setTitle("Error");
+                 alert.setHeaderText(null);
+                 alert.setContentText("Usuario o contraseña incorrecta.");
+                 alert.initStyle(StageStyle.UTILITY);
+                 alert.showAndWait();
              }
          }catch (SQLException ex){
 
+         } catch (IOException e) {
+             throw new RuntimeException(e);
          }
 
 
-
-    }
+     }
 
     @FXML
     void hlCrearCuenta_clic(ActionEvent event) {

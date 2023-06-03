@@ -5,12 +5,19 @@
 package controller.eventos;
 
 import clases.evento;
+import com.proyect.emsa.App;
+
+import java.io.IOException;
 import java.net.URL;
+import clases.eventoSeleccionado;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -38,10 +45,15 @@ public class ListaEventoController implements Initializable {
     @FXML
     private GridPane ListaEventos;
 
+    @FXML
+    private Button btnRegresarInicio;
+
     /**
      * Initializes the controller class.
      */
     private conexion connPosgres;
+
+    private App appObj = new App();
 
     public ListaEventoController() {
         this.connPosgres = new conexion();
@@ -54,7 +66,7 @@ public class ListaEventoController implements Initializable {
         vbox.setSpacing(10);
 
         // Establecer el ancho de cada columna al 50% de la pantalla
-        vbox.setStyle("-fx-column-count: 2; -fx-column-gap: 10px; -fx-pref-width: 50%; -fx-margin-top: 200px;");
+        vbox.setStyle("-fx-column-count: 2; -fx-column-gap: 10px; -fx-pref-width: 50%; -fx-margin-top: 50px;");
         vbox.setPadding(new Insets(10));
         vbox.setSpacing(10);
 
@@ -71,7 +83,7 @@ public class ListaEventoController implements Initializable {
         scrollPane.setFitToHeight(true);
 
         ListaEventos.setMargin(scrollPane, new Insets(60, 0, 0, 0));
-        ListaEventos.add(scrollPane, 0, 0);
+        ListaEventos.add(scrollPane, 0, 1);
     }
 
     public ArrayList<evento> ListEvents() {
@@ -91,8 +103,8 @@ public class ListaEventoController implements Initializable {
                 events.setFechaFinal(resultado.getTimestamp("fechafinal").toLocalDateTime());
                 events.setLinkImg(resultado.getString("img"));
                 //events.setVisible(resultado.getBoolean("Visible"));
-                events.setFechaInicioVisible(resultado.getTimestamp("fechavisible").toLocalDateTime());
-                events.setFechaFinalVisible(resultado.getTimestamp("fechavisiblefinal").toLocalDateTime());
+                events.setFechaInicioVisible(resultado.getDate("fechavisible"));
+                events.setFechaFinalVisible(resultado.getDate("fechavisiblefinal"));
                 events.setResponsable(resultado.getInt("codigoresponsable"));
 
                 listEvents.add(events);
@@ -113,9 +125,11 @@ public class ListaEventoController implements Initializable {
 
         // Agregar los elementos de la tarjeta: nombre y foto (suponiendo que tienes propiedades 'name' y 'photo' en la clase User)
         Label nameLabel = new Label(event.getNombreEvento());
+        final Integer CodigoEvento = event.getCodigEvento();
+
         nameLabel.setFont(Font.font("System", FontWeight.BOLD, 18));
-         String pathResource = System.getProperty("user.dir")+event.getLinkImg();
-        ImageView photoImageView = new ImageView(new Image("file:"+pathResource));
+        String pathResource = System.getProperty("user.dir") + event.getLinkImg();
+        ImageView photoImageView = new ImageView(new Image("file:" + pathResource));
         photoImageView.setFitWidth(200);
         photoImageView.setFitHeight(200);
 
@@ -142,15 +156,37 @@ public class ListaEventoController implements Initializable {
 
         fechas.getChildren().addAll(dateLabel, timeLabel);
 
-        Button seeDetal = new Button("Ver Detalle Evento");
-        seeDetal.setFont(Font.font("System", FontWeight.BOLD, 12));
-        VBox.setMargin(seeDetal, new Insets(10));
+        Button seeDetail = new Button("Detalle");
+        seeDetail.setFont(Font.font("System", FontWeight.BOLD, 12));
+        VBox.setMargin(seeDetail, new Insets(10));
 
+        seeDetail.setOnAction(event1 -> {
+
+            try {
+               
+                eventoSeleccionado.setCodigoEvento(CodigoEvento);
+
+                appObj.setRoot("DetalleEventocompra");
+            } catch (IOException ex) {
+                Logger.getLogger(ListaEventoController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        });
         // Agregar los elementos al HBox de la tarjeta
         card.setAlignment(Pos.CENTER);
-        card.getChildren().addAll(nameLabel, container, fechas, seeDetal);
+        card.getChildren().addAll(nameLabel, container, fechas, seeDetail);
 
         return card;
+    }
+
+    @FXML
+    void btnRegresarInicio_clic(ActionEvent event) throws IOException {
+        appObj.setRoot("Inicio");
+
+    }
+
+    public void setValor(int valor) {
+        // Haz algo con el valor recibido
     }
 
 }

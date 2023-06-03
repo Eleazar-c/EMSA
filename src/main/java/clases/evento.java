@@ -5,6 +5,7 @@
 package clases;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -20,13 +21,29 @@ public class evento {
     private String nombreEvento;
     private String sinopsis;
 
-    private LocalDateTime fechaInicioVisible;
-    private LocalDateTime  fechaFinalVisible;
+    private Date fechaInicioVisible;
+    private Date  fechaFinalVisible;
     private LocalDateTime fechainicio;
     private LocalDateTime fechaFinal;
 
     public LocalDateTime getFechainicio() {
         return fechainicio;
+    }
+
+    public Date getFechaInicioVisible() {
+        return fechaInicioVisible;
+    }
+
+    public void setFechaInicioVisible(Date fechaInicioVisible) {
+        this.fechaInicioVisible = fechaInicioVisible;
+    }
+
+    public Date getFechaFinalVisible() {
+        return fechaFinalVisible;
+    }
+
+    public void setFechaFinalVisible(Date fechaFinalVisible) {
+        this.fechaFinalVisible = fechaFinalVisible;
     }
 
     public void setFechainicio(LocalDateTime fechainicio) {
@@ -91,22 +108,7 @@ public class evento {
         this.sinopsis = sinopsis;
     }
 
-    public LocalDateTime getFechaInicioVisible() {
-        return fechaInicioVisible;
-    }
-
-    public void setFechaInicioVisible(LocalDateTime fechaInicioVisible) {
-        this.fechaInicioVisible = fechaInicioVisible;
-    }
-
-    public LocalDateTime getFechaFinalVisible() {
-        return fechaFinalVisible;
-    }
-
-    public void setFechaFinalVisible(LocalDateTime fechaFinalVisible) {
-        this.fechaFinalVisible = fechaFinalVisible;
-    }
-
+   
     public float getPrecioVIPMG() {
         return precioVIPMG;
     }
