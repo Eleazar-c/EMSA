@@ -2,76 +2,78 @@ package clases;
 
 public class SessionSistema {
 
-    private String Usuario;
-    private String Clave;
-    private String nombre;
-    private String sistemaSession;
+    private static String Usuario;
+    private static String Clave;
+    private static String nombre;
+    private static String sistemaSession;
 
-    private int codigoUsuario;
-    private String correo;
-    private int codigoEstado;
-    private int codigoRol;
-    public String getUsuario() {
+    private static int codigoUsuario;
+    private static String correo;
+    private static int codigoEstado;
+    private static int codigoRol;
+    
+    
+    public static String getUsuario() {
         return Usuario;
     }
 
-    public void setUsuario(String usuario) {
+    public static void setUsuario(String usuario) {
         Usuario = usuario;
     }
 
-    public String getClave() {
+    public static String getClave() {
         return Clave;
     }
 
-    public void setClave(String clave) {
+    public static void setClave(String clave) {
         Clave = clave;
     }
 
-    public String getNombre() {
+    public static String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public static void setNombre(String nombre) {
+        SessionSistema.nombre = nombre;
     }
 
-    public String getSistemaSession() {
+    public static String getSistemaSession() {
         return sistemaSession;
     }
 
-    public void setSistemaSession(String sistemaSession) {
-        this.sistemaSession = sistemaSession;
+    public static void setSistemaSession(String sistemaSession) {
+        SessionSistema.sistemaSession = sistemaSession;
     }
 
-    public int getCodigoUsuario() {
+    public static int getCodigoUsuario() {
         return codigoUsuario;
     }
 
-    public void setCodigoUsuario(int codigoUsuario) {
-        this.codigoUsuario = codigoUsuario;
+    public static void setCodigoUsuario(int codigoUsuario) {
+        SessionSistema.codigoUsuario = codigoUsuario;
     }
 
-    public String getCorreo() {
+    public static String getCorreo() {
         return correo;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public static void setCorreo(String correo) {
+        SessionSistema.correo = correo;
     }
 
-    public int getCodigoEstado() {
+    public static int getCodigoEstado() {
         return codigoEstado;
     }
 
-    public void setCodigoEstado(int codigoEstado) {
-        this.codigoEstado = codigoEstado;
+    public static void setCodigoEstado(int codigoEstado) {
+        SessionSistema.codigoEstado = codigoEstado;
     }
 
-    public int getCodigoRol() {
+    public static int getCodigoRol() {
         return codigoRol;
     }
 
-    public void setCodigoRol(int codigoRol) {
-        this.codigoRol = codigoRol;
+    public static void setCodigoRol(int codigoRol) {
+        SessionSistema.codigoRol = codigoRol;
     }
 }

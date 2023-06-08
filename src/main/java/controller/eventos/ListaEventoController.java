@@ -4,6 +4,7 @@
  */
 package controller.eventos;
 
+import clases.SessionSistema;
 import clases.evento;
 import com.proyect.emsa.App;
 
@@ -61,6 +62,7 @@ public class ListaEventoController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         VBox vbox = new VBox();
         vbox.setPadding(new Insets(10));
         vbox.setSpacing(10);
@@ -181,7 +183,14 @@ public class ListaEventoController implements Initializable {
 
     @FXML
     void btnRegresarInicio_clic(ActionEvent event) throws IOException {
-        appObj.setRoot("Inicio");
+        //Verificamos que exista una sesion
+        SessionSistema session = new SessionSistema();
+        if(session.getCodigoUsuario() == 0) {
+            appObj.setRoot("Login");
+        }else{
+            appObj.setRoot("Inicio");
+        }
+
 
     }
 

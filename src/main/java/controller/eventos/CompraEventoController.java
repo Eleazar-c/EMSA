@@ -275,6 +275,14 @@ public class CompraEventoController implements Initializable {
         eventoSeleccionado.setPlanB(PlanB);
 
         eventoSeleccionado.setTotalvoletos(Vip+VipMG+PlanA+PlanB);
+        if((Vip+VipMG+PlanA+PlanB) > 10){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Limite de asientos superados");
+            alert.setHeaderText(null);
+            alert.setContentText("La compra de asientos tiene un limite de 10");
+            alert.initStyle(StageStyle.UTILITY);
+            alert.showAndWait();
+        }
 
 
 

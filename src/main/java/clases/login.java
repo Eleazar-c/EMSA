@@ -11,6 +11,7 @@ public class login {
     private int codigoEstado;
     private int CodigoUsuario;
 
+    
     public String getNombreCompleto() {
         return NombreCompleto;
     }

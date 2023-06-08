@@ -80,7 +80,7 @@
                <padding>
                   <Insets top="10.0" />
                </padding></PasswordField>
-            <Label text="Rol:">
+            <Label fx:id="lblRol" text="Rol:">
                <font>
                   <Font size="18.0" />
                </font>

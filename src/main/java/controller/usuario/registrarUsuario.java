@@ -1,6 +1,7 @@
 package controller.usuario;
+
 import java.net.URL;
-    import java.sql.SQLException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -19,8 +20,9 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import javafx.event.ActionEvent;
 import javafx.stage.StageStyle;
+import clases.SessionSistema;
 
-public class registrarUsuario implements Initializable{
+public class registrarUsuario implements Initializable {
 
     @FXML
     private Button btnCancelar;
@@ -40,20 +42,27 @@ public class registrarUsuario implements Initializable{
     @FXML
     private PasswordField txtpassword;
 
+    @FXML
+    private Label lblRol;
+
     private usuarioModel usuarioModeloObj = new usuarioModel();
 
     /**
      * Initializes the controller class.
      */
-
     @Override
 
     public void initialize(URL url, ResourceBundle rb) {
-        cargarRoles();
+        if (SessionSistema.getCodigoUsuario() == 0) {
+            cboRol.setVisible(false);
+            lblRol.setVisible(false);
+        } else {
+            cargarRoles();
+        }
+
     }
 
-
-    public void cargarRoles(){
+    public void cargarRoles() {
         List<Rol> lista = new ArrayList<>();
         try {
             ResultSet listadoroles = usuarioModeloObj.ejecutarConsulta("SELECT * FROM public.rol");
@@ -68,7 +77,7 @@ public class registrarUsuario implements Initializable{
             cboRol.setItems(items);
             cboRol.setValue(new Rol(0, "Seleccione"));
 
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             System.out.println("Error al ejecutar la consulta SQL: " + ex.getMessage());
         }
     }
@@ -82,10 +91,13 @@ public class registrarUsuario implements Initializable{
         usuarioObj.setCorreo(txtCorreo.getText());// Campo correo
         usuarioObj.setEstado(1);// Campo estado
         usuarioObj.setPassword(txtpassword.getText());// Campo estado
-
+        //Si esta creando un nuevo usuario desde el login se establece por defecto el rol en 2
+        if (SessionSistema.getCodigoUsuario() == 0) {
+            usuarioObj.setRol(2);
+        }
         if (!(cboRol.getValue().getCodigo() == 0)) {
             usuarioObj.setRol(cboRol.getValue().getCodigo());
-        }else{
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
@@ -124,10 +136,16 @@ public class registrarUsuario implements Initializable{
         txtpassword.setText("");
         cboRol.getSelectionModel().select(0);
     }
-    
+
     @FXML
     void btnCancelar_clic(ActionEvent event) throws IOException {
         App appObj = new App();
-        appObj.setRoot("Inicio");
+        //Verificamos que exista una sesion
+        if (SessionSistema.getCodigoUsuario() == 0) {
+            appObj.setRoot("Login");
+        } else {
+            appObj.setRoot("Inicio");
+        }
+
     }
 }

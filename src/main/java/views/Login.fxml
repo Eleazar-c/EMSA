@@ -29,7 +29,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Hyperlink fx:id="hlCrearCuenta" layoutX="203.0" layoutY="510.0" onAction="#hlCrearCuenta_clic" text="Crear cuenta" />
+            <Hyperlink fx:id="hlCrearCuenta" layoutX="162.0" layoutY="510.0" onAction="#hlCrearCuenta_clic" text="Crear cuenta" />
             <PasswordField fx:id="txtclave" layoutX="147.0" layoutY="341.0" prefHeight="40.0" prefWidth="204.0" promptText="*******" />
             <Label layoutX="214.0" layoutY="229.0" text="Usuario:">
                <font>
@@ -41,6 +41,8 @@
                   <Font size="20.0" />
                </font>
             </Label>
+            <Hyperlink fx:id="hlInvitado" layoutX="256.0" layoutY="510.0" onAction="#hlInvitado_clic" text="Invitado" />
+            <Label layoutX="247.0" layoutY="513.0" text="/" />
          </children>
       </AnchorPane>
    </children>

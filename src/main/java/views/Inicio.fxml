@@ -72,7 +72,7 @@
                   <Button fx:id="btnCerrarSesion" layoutX="1.0" layoutY="574.0" mnemonicParsing="false" onAction="#btnCerrarSesion_clic" prefHeight="38.0" prefWidth="171.0" style="-fx-background-color: #951f2b;" text="Cerrar Session" textFill="WHITE" />
                </children>
             </AnchorPane>
-            <Label fx:id="lblNombre" layoutX="171.0" layoutY="52.0" prefHeight="38.0" prefWidth="64.0" text="Label">
+            <Label fx:id="lblNombre" layoutX="171.0" layoutY="52.0" prefHeight="38.0" prefWidth="689.0" text="Label">
                <font>
                   <Font size="24.0" />
                </font>
