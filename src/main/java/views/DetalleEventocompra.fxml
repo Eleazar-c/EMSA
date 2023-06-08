@@ -6,14 +6,16 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="665.0" prefWidth="858.0" style="-fx-background-color: #f5f4d7;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.eventos.CompraEventoController">
+<AnchorPane id="AnchorPane" prefHeight="665.0" prefWidth="858.0" style="-fx-background-color: white;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.eventos.CompraEventoController">
     <stylesheets>
         <URL value="@/style/ingresoeventos.css" />
     </stylesheets>
@@ -27,42 +29,42 @@
             <Font name="System Bold" size="15.0" />
          </font></Label>
       <TextArea fx:id="txtDescripcion" disable="true" layoutX="42.0" layoutY="168.0" prefHeight="65.0" prefWidth="293.0" />
-      <Label layoutX="43.0" layoutY="240.0" text="Precio de los boletos:">
+      <Label layoutX="39.0" layoutY="260.0" text="Precio de los boletos:">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Label>
-      <Label layoutX="47.0" layoutY="278.0" text="VIP+M&amp;G:">
+      <Label layoutX="47.0" layoutY="323.0" text="VIP+M&amp;G:">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <Label layoutX="48.0" layoutY="324.0" text="VIP:">
+      <Label layoutX="48.0" layoutY="361.0" text="VIP:">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <Label layoutX="177.0" layoutY="278.0" text="Platea A:">
+      <Label layoutX="42.0" layoutY="400.0" text="Platea A:">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <Label layoutX="177.0" layoutY="324.0" text="Platea B:">
+      <Label layoutX="42.0" layoutY="446.0" text="Platea B:">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <Label layoutX="42.0" layoutY="372.0" text="Fecha vigente">
+      <Label layoutX="45.0" layoutY="498.0" text="Fecha vigente">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Label>
-      <Label layoutX="35.0" layoutY="418.0" text="Inicio:">
+      <Label layoutX="38.0" layoutY="544.0" text="Inicio:">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <Label layoutX="34.0" layoutY="457.0" text="Fin:">
+      <Label layoutX="207.0" layoutY="544.0" text="Fin:">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <TableView fx:id="tvFechasEvento" layoutX="516.0" layoutY="406.0" prefHeight="224.0" prefWidth="319.0">
+      <TableView fx:id="tvFechasEvento" layoutX="539.0" layoutY="418.0" prefHeight="224.0" prefWidth="280.0">
         <columns>
-            <TableColumn fx:id="colFecha" prefWidth="142.0" text="Fecha" />
-            <TableColumn fx:id="colHora" minWidth="8.0" prefWidth="111.0" text="Hora" />
+            <TableColumn fx:id="colFecha" prefWidth="175.0" text="Fecha" />
+            <TableColumn fx:id="colHora" minWidth="0.0" prefWidth="102.0" text="Hora" />
         </columns>
       </TableView>
       <GridPane>
@@ -74,15 +76,11 @@
         </rowConstraints>
       </GridPane>
       <ImageView fx:id="ivImagen" fitHeight="224.0" fitWidth="305.0" layoutX="523.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btnCancelar" layoutX="269.0" layoutY="579.0" mnemonicParsing="false" onAction="#btnRegresar_clic" prefHeight="65.0" prefWidth="184.0" style="-fx-background-color: #951f2b;" text="Regresar" textFill="WHITE">
+      <Button fx:id="btnCancelar" layoutX="26.0" layoutY="603.0" mnemonicParsing="false" onAction="#btnRegresar_clic" prefHeight="39.0" prefWidth="165.0" style="-fx-background-color: #FC0404;" text="Regresar" textFill="WHITE">
          <font>
-            <Font size="33.0" />
+            <Font size="18.0" />
          </font></Button>
-      <Button fx:id="btnRegistrar" layoutX="30.0" layoutY="579.0" mnemonicParsing="false" onAction="#ComprarBoletosEvento" prefHeight="39.0" prefWidth="207.0" style="-fx-background-color: #951f2b;" text="Comprar" textFill="WHITE">
-         <font>
-            <Font size="33.0" />
-         </font></Button>
-      <AnchorPane prefHeight="55.0" prefWidth="858.0" style="-fx-background-color: #951f2b;">
+      <AnchorPane prefHeight="55.0" prefWidth="858.0" style="-fx-background-color: #27374D;">
          <children>
             <Label layoutX="14.0" layoutY="2.0" text="Detelle del evento" textFill="WHITE">
                <font>
@@ -97,16 +95,37 @@
          </font>
       </Label>
       <Label fx:id="lbNombreEvento" layoutX="50.0" layoutY="120.0" text="Label" />
-      <Label fx:id="lblPrecioVipM" layoutX="125.0" layoutY="278.0" text="Label" />
-      <Label fx:id="lblPrecioVip" layoutX="124.0" layoutY="324.0" text="Label" />
-      <Label fx:id="lblPrecioA" layoutX="256.0" layoutY="278.0" text="Label" />
-      <Label fx:id="lblPrecioB" layoutX="255.0" layoutY="324.0" prefWidth="28.0" text="Label" />
-      <Label fx:id="lblFechaFinal" layoutX="101.0" layoutY="457.0" text="Label" />
-      <Label fx:id="lblFechaInicio" layoutX="101.0" layoutY="418.0" text="Label" />
-      <Label layoutX="523.0" layoutY="372.0" text="Fechas del evento">
+      <Label fx:id="lblPrecioVipM" layoutX="167.0" layoutY="322.0" prefHeight="18.0" prefWidth="50.0" text="Label" />
+      <Label fx:id="lblPrecioVip" layoutX="166.0" layoutY="360.0" prefHeight="18.0" prefWidth="50.0" text="Label" />
+      <Label fx:id="lblPrecioA" layoutX="163.0" layoutY="399.0" prefHeight="18.0" prefWidth="50.0" text="Label" />
+      <Label fx:id="lblPrecioB" layoutX="162.0" layoutY="445.0" prefHeight="18.0" prefWidth="62.0" text="Label" />
+      <Label fx:id="lblFechaFinal" layoutX="274.0" layoutY="544.0" text="Label" />
+      <Label fx:id="lblFechaInicio" layoutX="104.0" layoutY="544.0" text="Label" />
+      <Label layoutX="588.0" layoutY="359.0" text="Fechas del evento">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
+      <Label layoutX="553.0" layoutY="393.0" text="*Seleccionar una fecha para la compra." />
+      <Button fx:id="btnComprar" layoutX="243.0" layoutY="603.0" mnemonicParsing="false" onAction="#btnComprar_clic" prefHeight="39.0" prefWidth="165.0" style="-fx-background-color: #39C011;" text="Comprar" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <TextField fx:id="txtVipMg" layoutX="295.0" layoutY="318.0" prefHeight="26.0" prefWidth="75.0" />
+      <TextField fx:id="txtVip" layoutX="295.0" layoutY="356.0" prefHeight="26.0" prefWidth="75.0" />
+      <TextField fx:id="txtPlan_A" layoutX="295.0" layoutY="395.0" prefHeight="26.0" prefWidth="75.0" />
+      <TextField fx:id="txtPlan_B" layoutX="295.0" layoutY="441.0" prefHeight="26.0" prefWidth="75.0" />
+      <Label layoutX="228.0" layoutY="322.0" text="===&gt;" />
+      <Label layoutX="228.0" layoutY="360.0" text="===&gt;" />
+      <Label layoutX="228.0" layoutY="399.0" text="===&gt;" />
+      <Label layoutX="228.0" layoutY="446.0" text="===&gt;" />
+      <Line endX="233.0" layoutX="137.0" layoutY="308.0" startX="-116.0" />
+      <Line endX="229.0" layoutX="144.0" layoutY="486.0" startX="-124.0" />
+      <Label layoutX="168.0" layoutY="290.0" text="Precio:" />
+      <Label layoutX="34.0" layoutY="290.0" prefHeight="18.0" prefWidth="110.0" text="Nombre Asientos" />
+      <Label layoutX="295.0" layoutY="290.0" text="Cantidad" />
+      <Line endX="223.0" layoutX="149.0" layoutY="281.0" startX="-129.0" />
+      <Line endX="484.0" layoutX="348.0" layoutY="96.0" startX="-328.5" />
    </children>
 </AnchorPane>

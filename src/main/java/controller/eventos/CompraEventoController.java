@@ -42,13 +42,14 @@ public class CompraEventoController implements Initializable {
     private Button btnCancelar;
 
     @FXML
-    private Button btnRegistrar;
+    private Button btnComprar;
 
     @FXML
     private TableColumn<evento, String> colFecha;
 
     @FXML
     private TableColumn<evento, String> colHora;
+
 
     @FXML
     private ImageView ivImagen;
@@ -82,6 +83,19 @@ public class CompraEventoController implements Initializable {
 
     @FXML
     private Label lblTituloEvento;
+
+    @FXML
+    private TextField txtPlan_A;
+
+    @FXML
+    private TextField txtPlan_B;
+
+    @FXML
+    private TextField txtVip;
+
+    @FXML
+    private TextField txtVipMg;
+
 
     private conexion connPosgres;
 
@@ -120,7 +134,7 @@ public class CompraEventoController implements Initializable {
                 //lblFechaInicio.setText(datosEvento.getString("fechainicio"));
                 //lblFechaFinal.setText(datosEvento.getString("fechafinal"));
                 DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
-                
+
                 String vippmg = datosEvento.getString("vipmg");
                 BigDecimal vipmpgD = new BigDecimal(vippmg);
                 String vipmpgDFormateado = decimalFormat.format(vipmpgD);
@@ -131,7 +145,7 @@ public class CompraEventoController implements Initializable {
                 BigDecimal vip = new BigDecimal(vipStr);
                 String vipFormateado = decimalFormat.format(vip);
                 lblPrecioVip.setText("Q " + vipFormateado);
-                
+
                 //lblPrecioVip.setText("Q " + datosEvento.getString("vip"));
                 String plan_a = datosEvento.getString("plan_a");
                 BigDecimal plan_aD = new BigDecimal(plan_a);
@@ -144,7 +158,7 @@ public class CompraEventoController implements Initializable {
                 String plan_bDFormateado = decimalFormat.format(plan_bD);
                 lblPrecioB.setText("Q " + plan_bDFormateado);
                 //lblPrecioB.setText("Q " + datosEvento.getString("plan_b"));
-                
+
                 String rutaRelativa = System.getProperty("user.dir") + datosEvento.getString("img");
                 File archivoImagen = new File(rutaRelativa);
                 if (archivoImagen.exists()) {
@@ -182,7 +196,49 @@ public class CompraEventoController implements Initializable {
             // Asignar los valores de propiedad de columna a las propiedades del objeto RegistroEvento
             colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
             colHora.setCellValueFactory(new PropertyValueFactory<>("hora"));
+            /*
+            colAccion.setCellFactory(param -> {
+                return new TableCell<evento, Button>() {
+                    private final Button Seleccionar = new Button("Seleccion");
 
+                    {
+                        //Seleccionar.getStyleClass().add("button-success");
+                        Seleccionar.setOnAction(event -> {
+                            //obtenemos el valor de la fila seleccionada
+                            evento FechaSeleccionada = getTableView().getSelectionModel().getSelectedItem();
+                            if (FechaSeleccionada != null) {
+                                String fecha = FechaSeleccionada.getFecha();
+                                String hora = FechaSeleccionada.getHora();
+                                eventoSeleccionado eventoSeleccionadoObj = new eventoSeleccionado();
+                                eventoSeleccionadoObj.setFecha(fecha);
+                                eventoSeleccionadoObj.setHora(hora);
+                                System.out.println("Fecha seleccionada: " + fecha);
+                                System.out.println("Hora seleccionada: " + hora);
+                            } else {
+                                Alert alert = new Alert(Alert.AlertType.ERROR);
+                                alert.setTitle("Error");
+                                alert.setHeaderText("Fecha vacia");
+                                alert.setContentText("Debe de seleccionar una fecha para la compra");
+                                alert.initStyle(StageStyle.UTILITY);
+                                alert.showAndWait();
+                            }
+                        });
+                    }
+
+                    @Override
+                    protected void updateItem(Button item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(Seleccionar);
+                        }
+                    }
+                };
+            });
+             */
+
+            //colAccion.setStyle("-fx-alignment: CENTER;");
         } catch (SQLException ex) {
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -197,8 +253,53 @@ public class CompraEventoController implements Initializable {
     }
 
     @FXML
-    void ComprarBoletosEvento(ActionEvent event) {
-        System.out.println("Comprar boletos");
+    void btnComprar_clic(ActionEvent event) {
+        if (txtVip.getText().isEmpty() && txtVipMg.getText().isEmpty() && txtPlan_A.getText().isEmpty() && txtPlan_B.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Debe de comprar al menos un boleto de cualquier asiento.");
+            alert.initStyle(StageStyle.UTILITY);
+            alert.showAndWait();
+        }
+
+        Integer Vip = txtVip.getText().trim().isEmpty() ? 0 : Integer.valueOf(txtVip.getText().trim());
+        Integer VipMG = txtVipMg.getText().trim().isEmpty() ? 0 : Integer.valueOf(txtVipMg.getText().trim());
+        Integer PlanA = txtPlan_A.getText().trim().isEmpty() ? 0 : Integer.valueOf(txtPlan_A.getText().trim());
+        Integer PlanB = txtPlan_B.getText().trim().isEmpty() ? 0 : Integer.valueOf(txtPlan_B.getText().trim());
+
+
+        eventoSeleccionado.setVip(Vip);
+        eventoSeleccionado.setVipMG(VipMG);
+        eventoSeleccionado.setPlanA(PlanA);
+        eventoSeleccionado.setPlanB(PlanB);
+
+        eventoSeleccionado.setTotalvoletos(Vip+VipMG+PlanA+PlanB);
+
+
+
+
+
+        evento eventoSeleccionado = tvFechasEvento.getSelectionModel().getSelectedItem();
+        if (eventoSeleccionado != null) {
+            // Accede al valor deseado del evento seleccionado
+            String fecha = eventoSeleccionado.getFecha();
+            String hora = eventoSeleccionado.getHora();
+
+            // Realiza las operaciones deseadas con los valores obtenidos
+            System.out.println("Fecha seleccionada: " + fecha);
+            System.out.println("Hora seleccionada: " + hora);
+            eventoSeleccionado eventoSeleccionadoObj = new eventoSeleccionado();
+            eventoSeleccionadoObj.setFecha(fecha);
+            eventoSeleccionadoObj.setHora(hora);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Fecha no seleccionada");
+            alert.setHeaderText(null);
+            alert.setContentText("Debe de seleccionar una fecha para la compra");
+            alert.initStyle(StageStyle.UTILITY);
+            alert.showAndWait();
+        }
     }
 
     @FXML

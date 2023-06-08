@@ -12,7 +12,6 @@ controller\eventos\IngresoEventosController.class
 controller\login\RegistrarLoginController.class
 controller\usuario\registrarUsuario.class
 controller\home\InicioController.class
-model\modelo.class
 clases\evento.class
 model\usuarioModel.class
 com\proyect\emsa\App.class

@@ -11,6 +11,7 @@ public class modelo {
     public modelo(){
         this.connPosgres= new conexion();
     }
+    
     public ResultSet ejecutarConsulta(String consulta) {
         try {
             Statement conn = this.connPosgres.getConection().createStatement();

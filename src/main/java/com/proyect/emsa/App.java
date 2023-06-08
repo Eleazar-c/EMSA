@@ -30,29 +30,7 @@ public class App extends Application {
         stage.show();
     }
 
-    /*@Override
-    public void start(Stage stage) {
-
-        try {
-            // root = FXMLLoader.load(getClass().getResource("/fxml/FXML_Tarea.fxml"));
-            URI uri = Paths.get("src/main/java/views/registroUsuario.fxml").toAbsolutePath().toUri();
-            System.out.println("URI:" + uri.toString());
-            Parent root = FXMLLoader.load(uri.toURL());
-            Scene scene = new Scene(root);
-
-            // Maximizar la ventana
-            stage.setMaximized(true);
-
-            stage.setScene(scene);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("error: " + ex.getMessage());
-        }
-
-    }
-     */
+   
     public void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
