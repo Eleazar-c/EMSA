@@ -13,12 +13,12 @@ import java.sql.SQLException;
  * @author Eleazar
  */
 public class conexion {
-    private static String server= "localhost";
-    private static String puerto = "5432";
-    private static String bd = "EMSA";
-     private static String url = "jdbc:postgresql://"+server+":"+puerto+"/"+bd;
-    private static String user = "postgres";
-    private static String password = "gemelo2";
+    private static String server= "";
+    private static String puerto = "";
+    private static String bd = "";
+     private static String url = "";
+    private static String user = "";
+    private static String password = "";
     
    
     public static Connection getConection(){
