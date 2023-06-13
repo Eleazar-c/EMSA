@@ -8,6 +8,8 @@ import clases.Parametro;
 import clases.asientos;
 import clases.eventoSeleccionado;
 import clases.seccion;
+
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,7 +23,11 @@ import java.util.Map;
 import java.util.Queue;
 
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
+
+import com.proyect.emsa.App;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -48,7 +54,10 @@ public class SeleccionAsientosController implements Initializable {
 
     @FXML
     public GridPane GridPadre;
-
+    
+    @FXML
+    private Button btnRegresar;
+    
     private final GridPane contenedor = new GridPane();
 
     private final ArrayList<asientos> todaListaAsinto = new ArrayList<asientos>();
@@ -89,6 +98,7 @@ public class SeleccionAsientosController implements Initializable {
         contenedor.add(grid4L, 2, 1);
         vbox.getChildren().add(contenedor);
 
+       
         ScrollPane scrollPane = new ScrollPane(vbox);
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
@@ -250,14 +260,14 @@ public class SeleccionAsientosController implements Initializable {
             seleccionados.remove(button);
             Background originalBackground = colorOriginal.get(button); // Obtener el color original del botón
             button.setBackground(originalBackground);
-        } else if (seleccionados.size() < 2) {
+        } else if (seleccionados.size() < eventoSeleccionado.getTotalvoletos()) {
             seleccionados.add(button);
             Background originalBackground = button.getBackground(); // Obtener el color original del botón
             colorOriginal.put(button, originalBackground); // Guardar el color original en el mapa
             button.setBackground(new Background(new BackgroundFill(Color.GREEN, new CornerRadii(10), null)));
         } else {
             Button primerBoton = seleccionados.get(0);
-             Background primerBotonBackground = colorOriginal.get(primerBoton);
+            Background primerBotonBackground = colorOriginal.get(primerBoton);
             primerBoton.setBackground(colorAsiento(asiento.getCodigoSeccion()));
             //primerBoton.setBackground(colorAsiento(asiento.getCodigoSeccion()));
             seleccionados.remove(0);
@@ -275,60 +285,7 @@ public class SeleccionAsientosController implements Initializable {
         }
     }
 
-    /*
-    private StringBuilder asientoAgregarSeleccion(String asiento) {
-        Parametro<Integer> param = eventoSeleccionado.getParametroObj();
-        StringBuilder asientos = new StringBuilder();
-        if (seleccionados.contains(asiento)) {
-            // Eliminar el elemento
-            Button targetButton = (Button) contenedor.lookup("#" + asiento);
-            asientos filtro = todaListaAsinto.stream().filter(x -> x.getCodigo() == Integer.valueOf(asiento.split("\\|")[1])).collect(Collectors.toList()).get(0);
-            targetButton.setBackground(this.colorAsiento(filtro.getCodigoSeccion()));
-            targetButton.setTextFill(Color.WHITE);
-            seleccionados.remove(asiento);
-        } else if (seleccionados.size() < param.getDato()) {
-            seleccionados.add(asiento);
-            Button targetButton = (Button) contenedor.lookup("#" + asiento);
-            targetButton.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(10), null)));
-            targetButton.setTextFill(Color.BLACK);
-        } else {
-            String ultimoDato = seleccionados.get(0);
-            Button targetButton = (Button) contenedor.lookup("#" + ultimoDato);
-            asientos filtro = todaListaAsinto.stream().filter(x -> x.getCodigo() == Integer.valueOf(ultimoDato.split("\\|")[1])).collect(Collectors.toList()).get(0);
-            targetButton.setBackground(this.colorAsiento(filtro.getCodigoSeccion()));
-            targetButton.setTextFill(Color.WHITE);
-            seleccionados.remove(0);
-            seleccionados.add(asiento);
-            targetButton = (Button) contenedor.lookup("#" + asiento);
-            targetButton.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(10), null)));
-            targetButton.setTextFill(Color.BLACK);
-        }
-
-        int filas = seleccionados.size();
-        int columnas = 2;
-        String[][] matriz = new String[filas][columnas];
-
-        // Asignar los valores a la matriz
-        for (int i = 0; i < filas; i++) {
-            String[] dato = seleccionados.get(i).split("\\|");
-            matriz[i][0] = dato[0];
-            matriz[i][1] = dato[1];
-        }
-
-        ArrayList<String> ids = new ArrayList<>();
-
-        for (int i = 0; i < filas; i++) {
-            String nombre = matriz[i][0];
-            String id = matriz[i][1];
-            asientos.append(" ").append(nombre).append(" ");
-            ids.add(id);
-        }
-
-        CodigoSelecionAsiento = ids;
-
-        return asientos;
-    }
-     */
+  
     private Background colorAsiento(int idSeccion) {
         Background model = null;
         switch (idSeccion) {
@@ -351,4 +308,10 @@ public class SeleccionAsientosController implements Initializable {
         return model;
     }
 
+    
+    @FXML
+    void btnRegresarClic(ActionEvent event) throws IOException {
+         App appObj = new App();
+         appObj.setRoot("DetalleEventocompra");
+    }
 }

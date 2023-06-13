@@ -253,7 +253,7 @@ public class CompraEventoController implements Initializable {
     }
 
     @FXML
-    void btnComprar_clic(ActionEvent event) {
+    void btnComprar_clic(ActionEvent event) throws IOException {
         if (txtVip.getText().isEmpty() && txtVipMg.getText().isEmpty() && txtPlan_A.getText().isEmpty() && txtPlan_B.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -261,6 +261,7 @@ public class CompraEventoController implements Initializable {
             alert.setContentText("Debe de comprar al menos un boleto de cualquier asiento.");
             alert.initStyle(StageStyle.UTILITY);
             alert.showAndWait();
+            return;
         }
 
         Integer Vip = txtVip.getText().trim().isEmpty() ? 0 : Integer.valueOf(txtVip.getText().trim());
@@ -282,6 +283,7 @@ public class CompraEventoController implements Initializable {
             alert.setContentText("La compra de asientos tiene un limite de 10");
             alert.initStyle(StageStyle.UTILITY);
             alert.showAndWait();
+            return;
         }
 
 
@@ -300,6 +302,8 @@ public class CompraEventoController implements Initializable {
             eventoSeleccionado eventoSeleccionadoObj = new eventoSeleccionado();
             eventoSeleccionadoObj.setFecha(fecha);
             eventoSeleccionadoObj.setHora(hora);
+
+            appObj.setRoot("SeleccionAsientos");
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Fecha no seleccionada");
@@ -307,6 +311,7 @@ public class CompraEventoController implements Initializable {
             alert.setContentText("Debe de seleccionar una fecha para la compra");
             alert.initStyle(StageStyle.UTILITY);
             alert.showAndWait();
+            return;
         }
     }
 

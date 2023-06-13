@@ -13,13 +13,16 @@ import java.sql.SQLException;
  * @author Eleazar
  */
 public class conexion {
-    private static String server= "";
-    private static String puerto = "";
-    private static String bd = "";
-     private static String url = "";
-    private static String user = "";
-    private static String password = "";
     
+   private static String server= "emsa.postgres.database.azure.com";
+    private static String puerto = "5432";
+    private static String bd = "emsa";
+     private static String url = "jdbc:postgresql://"+server+":"+puerto+"/"+bd;//host=emsa.postgres.database.azure.com port=5432 dbname={your_database} user=emsa password={your_password}
+    private static String user = "emsa";//emsa
+    private static String password = "Cuellar1999!";
+    
+    
+   
    
     public static Connection getConection(){
        try{
